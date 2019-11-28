@@ -4,11 +4,11 @@ Remind yourself how web sockets work. Rails has wrapped this into a more intergr
 
 ![](https://user-images.githubusercontent.com/4499581/69637451-93200a00-1050-11ea-8596-6bd25bc84972.jpg)
 
-Now when you send your message it is broadcast to all connected clients in "real time"
+Now when you send your message it is broadcast to all connected clients via Rails ActionCable.
 
 ![](https://user-images.githubusercontent.com/4499581/69637461-97e4be00-1050-11ea-8c14-a0fe50a27c6c.jpg)
 
-## Steps: Dependencies
+## add dependencies
 
 `rails new react-sockets --webpack=react`
 
@@ -24,7 +24,7 @@ This is creating the assets for the build step
 
 Yep add the build step to webpack.
 
-## Step: generators
+## generators
 
 `rails g model Message body:string && rails db:migrate`
 
@@ -40,7 +40,7 @@ OK this comes from the `react-rails` gem and enables us to create a stateful com
 
 `rails g channel chat`
 
-## Step: Code
+## code samples
 
 Create the ChatChannel class in `/app/channels/chat_channel.rb`
 
