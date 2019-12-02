@@ -71,9 +71,9 @@ rails db:migrate
 Easy. Now lets create our controller. I can pass to the controller all the methods I want to use in my controller (which is all 7)
 
 ```
-rails g controller todos index new create show edit update destroy
+rails g controller todos index new create update destroy
 ```
-Notice the controller is plural. The `todo_controller.rb` file has all the methods in it and we have a views folder with all our files also created. Now lets work our way through the CRUD cycle. The first thing to do it create new todos. Lets build the form.
+Notice the controller is plural. The `todos_controller.rb` file has all the methods in it and we have a views folder with all our files also created. Now lets work our way through the CRUD cycle. The first thing to do it create new todos. Lets build the form.
 
 ```html
 <!-- /app/views/todos/new.html.erb -->
