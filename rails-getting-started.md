@@ -108,7 +108,13 @@ end
 ```
 Now run the `rails routes` command again and see the difference. Now lets spin up the server again and see what our form is pointing to now. This is really important when working with rails. This is all the way RESTful and these conventions provide the rails for your project. You need to work with the routing to get the most pace out of development time. The form helpers help you create forms that route to the right places.
 
-We have an enpoint that we can post to now. Lets write the code to handle creating new todos. In the `todos_controller.rb` in the create method you'll receive a payload on `params` lets verify that payload and then create our new todo, then redirect to the main index page (which will be empty).
+Lets try to create a todo again. We will need to pass down to the template an empty instance of the model, then the form helper will be able to figure which route to POST to etc. Update your "new" method in your `todos_controller.rb`.
+```ruby
+  def new
+    @todo = Todo.new
+  end
+```
+Now when you load the form, you should see your form is set to POST to `/todos` which is what we want. We have an endpoint that we can post to now. Lets write the code to handle creating new todos. In the `todos_controller.rb` in the create method you'll receive a payload on `params` lets verify that payload and then create our new todo, then redirect to the main index page (which will be empty).
 ```ruby
 # /app/controllers/todos/todos_controller.rb
 
@@ -128,7 +134,7 @@ We have an enpoint that we can post to now. Lets write the code to handle creati
     params.require("todo").permit(:task)
   end
 ```
-one more thing. We want our todo to be created with a default value of 0 for the status. The place to do that is in the model.
+One more thing. We want our todo to be created with a default value of 0 for the status. The place to do that is in the model.
 ```ruby
 # /app/models/todo.rb
 class Todo < ApplicationRecord
