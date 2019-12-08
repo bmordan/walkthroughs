@@ -94,7 +94,7 @@ For react you might want to swap out the avatar property for the result of calli
     render component: "User", props: {user: current_user, avatar: url_for(current_user.avatar)}
   end
 ```
-then in the component just reference the url like this. You lose a little of the rails magic passing the object into a javascript react component.
+then in the component just reference the url like this. You lose a little of the rails magic passing the object into a javascript react component...
 ```js
 // /app/javascript/components/User.js
 import React from 'react'
@@ -108,6 +108,41 @@ export default function (props) {
     )
 }
 ```
+
+## Previews
+
+For a more professional touch you should preview the image file you are uploading. This is not too hard to do in your react form.
+```ruby
+  def new
+    render component: "UserCreate", props: {token: form_authenticity_token}
+  end
+```
+As we are not using the ruby form helper, we have to pass in the authenticity token by hand and add that as a hidden field in our form. So a simple component that adds a new user, and displays their avatar they want to upload you can do something like this:
+```js
+import React, {useState} from 'react'
+
+export default function (props) {
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState('')
+    const [file, setFile] = useState("")
+    const [preview, setPreview] = useState(null)
+    const onChange = evt => {
+        setPreview(window.URL.createObjectURL(evt.target.files[0]))
+        setFile(evt.target.value)
+    }
+    return (
+        <form action="/users" method="POST" encType="multipart/form-data">
+            {preview ? (<img src={preview} />) : null}
+            <input name="username" onChange={e => setUsername(e.target.value)} value={username} />
+            <input name="password" type="password" onChange={e => setPassword(e.target.value)} value={password}/>
+            <input type="file" onChange={onChange} name="avatar" value={file}/>
+            <input type="hidden" value={props.token} name="authenticity_token" />
+            <button>Upload</button>
+        </form>
+    )
+}
+```
+Try this out for yourself.
 
 
 
