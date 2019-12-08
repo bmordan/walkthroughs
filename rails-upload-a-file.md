@@ -86,6 +86,28 @@ That is going to give you something like this:
 ```
 There is more you can do with [ActiveStorage](https://guides.rubyonrails.org/v5.2/active_storage_overview.html) but this is enough to get started.
 
+## P.S.
+
+For react you might want to swap out the avatar property for the result of calling `url_for` see below for an example in the controller code that renders the react component.
+```ruby
+  def show
+    render component: "User", props: {user: current_user, avatar: url_for(current_user.avatar)}
+  end
+```
+then in the component just reference the url like this. You lose a little of the rails magic passing the object into a javascript react component.
+```js
+// /app/javascript/components/User.js
+import React from 'react'
+
+export default function (props) {
+    return (
+        <article>
+            <img src={props.avatar} />
+            <h2>{props.user.username}</h2>
+        </article>
+    )
+}
+```
 
 
 
