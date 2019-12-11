@@ -53,8 +53,9 @@ and in `/config/routes.rb`
 ```ruby
 Rails.application.routes.draw do
   root "sessions#index"
-  post "/login", to: "sessions#create", as: "login"
-  get "/logout", to: "session#destroy", as: "logout"
+  get "/login", to: "sessions#new"
+  post "/login", to: "sessions#create"
+  get "/logout", to: "sessions#destroy"
 
   resources :users do
     resources :links

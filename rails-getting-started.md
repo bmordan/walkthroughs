@@ -37,7 +37,7 @@ rails g controller hello
 the g is short for "generate" and its going to create a few files and a bit of wiring. The file we now want to edit is below:
 
 ```ruby
-# /app/controllers/hello/hello_controller.rb
+# /app/controllers/hello_controller.rb
 
 class HelloController < ApplicationController
   def world
